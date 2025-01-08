@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/function.css">
+    <link rel="stylesheet" href="../../css/fontawesome-free/css/all.min.css">
+    <title>Admin </title>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <!--Sidebar Section-->
+        <aside>
+            <div class="sidebar">
+                <a href="thongke.html">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Thống kê</h3>
+                </a>
+                <a href="nguoidung.html">
+                    <i class="fas fa-user"></i>
+                    <h3>Người Dùng</h3>
+                </a>
+                <a href="sanpham.html">
+                    <i class="fas fa-archive"></i>
+                    <h3>Sản Phẩm</h3>
+                </a>
+                <div class="active">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Đơn hàng</h3>
+                </div>
+                <a href="../index.html" class="last-child">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <h3>Đăng xuất</h3>
+                </a>
+            </div>
+        </aside>
+        <!--End of Sidebar Section-->
+
+        <!--Header-->
+        <div class="header">
+            <div class="toggle">
+                <div class="logo">
+                    <a href="nguoidung.html">
+                        <img src="../image/LogoSach.png">
+                        <h2>Admin</h2>
+                    </a>
+                </div>
+            </div>
+            <button type="button" class="close" id="closeHeaderButton">
+                <img src="../image/close.png" alt="close" class="icon">
+            </button>
+            <button type="button" class="menuHeader" id="menuHeaderButton">
+                <img src="../image/menu.png" alt="menu" class="icon">
+            </button>
+        </div>
+        <!--End of Header-->
+
+        <!-- Content Section -->
+        <div class="container-content">
+            <div class="content">
+                <div class="grid-header-cart">
+                    <span>Mã đơn</span>
+                    <span>Tên người dùng</span>
+                    <span>Địa chỉ</span>
+                    <span>Số điện thoại</span>
+                    <span>Số lượng</span>
+                    <span>Tổng tiền</span>
+                    <span>Tình trạng</span>
+                </div>
+                <div class="grid-body" id="dataCarts">
+                    <!-- JSON -->
+                </div>
+            </div>
+
+
+            <!-- Tool Section -->
+            <div class="tool">
+                <button type="button" class="add" id="add" onclick="openToolMenu()">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="search">
+                    <select name="cartFilter" id="cartFilter" onchange="cartFilter()">
+                        <option value="allCarts">Tất cả đơn hàng</option>
+                        <option value="cartsNotConfirm">Chưa xử lí</option>
+                        <option value="cartsConfirm">Đã xác nhận</option>
+                        <option value="cartsDelivered">Đã giao</option>
+                        <option value="cartsCanceled">Đã hủy</option>
+                    </select>
+                    <form>
+                        <input type="text" name="search" placeholder="Tìm kiếm...">
+                    </form>
+                    <button type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Menu -->
+        <div class="tool-menu" style="display: none;" id="tool-menu">
+            <button type="button" class="menu-close" id="closeToolMenuButton">
+                <img src="../image/close.png" alt="close" class="icon">
+            </button>
+            <div class="menu-add">
+                <h2>Thêm Đơn hàng</h2>
+                <form class="form" id="form-add">
+                    <div class="form-group">
+                        <label for="id-cart">Mã đơn:</label>
+                        <input type="text" name="id-cart" id="id-cart" placeholder="Nhập mã đơn">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name-cart">Tên người dùng:</label>
+                        <input type="text" name="name-cart" id="name-cart" placeholder="Nhập họ tên">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-cart">Địa chỉ:</label>
+                        <input type="text" name="address-cart" id="address-cart" placeholder="Nhập địa chỉ">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-cart">Số điện thoại:</label>
+                        <input type="tel" name="phone-cart" id="phone-cart" placeholder="Nhập số điện thoại">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity-cart">Số lượng:</label>
+                        <input type="number" name="quantity-cart" id="quantity-cart" placeholder="Nhập số lượng">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-cart">Tổng tiền:</label>
+                        <input type="number" name="total-cart" id="total-cart" placeholder="Nhập tổng tiền">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status-cart">Tình trạng:</label>
+                        <input type="text" name="status-cart" id="status-cart" placeholder="Nhập tình trạng đơn hàng">
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-submit">Thêm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--End of Content-Tool-->
+    </div>
+
+    <script src="../asset/js/function.js"></script>
+    <script src="../asset/js/validator.js"></script>
+    <script src="../asset/js/inputDataCart.js"></script>
+    <script src="../asset/js/admin.js"></script>
+
+
+    <script>
+        messageRequired = 'Vui lòng nhập thông tin.';
+        messagePhone = 'Vui lòng nhập đúng số điện thoại';
+        Validator({
+            form: '#form-add',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#id-cart',messageRequired),
+                Validator.isRequired('#name-cart',messageRequired),
+                Validator.isRequired('#address-cart',messageRequired),
+                Validator.isRequired('#quantity-cart',messageRequired),
+                Validator.isRequired('#total-cart',messageRequired),
+                Validator.isRequired('#status-cart',messageRequired),
+                Validator.isPhone('#phone-cart',messagePhone),
+                Validator.minLength('#address-cart',6),
+                Validator.minLength('#name-cart',6)
+            ]
+        })
+
+    </script>
+</body>
+
+</html>
