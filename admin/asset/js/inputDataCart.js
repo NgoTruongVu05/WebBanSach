@@ -134,6 +134,10 @@ function searchButton() {
                 }
             }
         })
+        var statusButtons = document.querySelectorAll('.status');
+        const detailButtons = document.querySelectorAll('.detailButton');
+        setStatusButtons(statusButtons,true);
+        setDetailButtons(detailButtons);
     }
 }
 

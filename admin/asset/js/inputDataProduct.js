@@ -224,31 +224,54 @@ function searchButton() {
                     console.log(data)
                     var newProduct = document.createElement('div');
                     newProduct.className = 'grid-row-product';
-                    newProduct.innerHTML = `
-                        <textarea placeholder="Nhập id..." readonly>${product.id}</textarea>
-                        <textarea placeholder="Nhập tên sản phẩm..." readonly>${product.name}</textarea>
-                        <textarea placeholder="Nhập tên tác giả..." readonly>${product.author}</textarea>
-                        <textarea placeholder="chọn thể loại..." readonly>${product.category}</textarea>
-                        <textarea placeholder="Nhập nhà xuất bản..." readonly>${product.nxb}</textarea>
-                        <textarea placeholder="Nhập giá tiền..." readonly>${product.price}</textarea>
-                        <div class="input-picture">
-                            <input type="file" name="picture" class="picture" placeholder="Chọn ảnh" onchange="displayFileName()" style="display: none;">
-                            <textarea placeholder="Nhập nội dung..." class="file-name" readonly>${product.picture}</textarea>
-                        </div>
-                        <div class="tool">
-                            <button type="button" class="fix">
-                                <i class="fas fa-wrench"></i>
-                            </button>
-                            <button type="button" class="delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
+                    if (product.isDeleted == "true"){
+                        newProduct.classList.add('banned');
+                        newProduct.innerHTML = `
+                            <textarea placeholder="Nhập id..." readonly>${product.id}</textarea>
+                            <textarea placeholder="Nhập tên sản phẩm..." readonly>${product.name}</textarea>
+                            <textarea placeholder="Nhập tên tác giả..." readonly>${product.author}</textarea>
+                            <textarea placeholder="chọn thể loại..." readonly>${product.category}</textarea>
+                            <textarea placeholder="Nhập nhà xuất bản..." readonly>${product.nxb}</textarea>
+                            <textarea placeholder="Nhập giá tiền..." readonly>${product.price}</textarea>
+                            <div class="input-picture">
+                                <input type="file" name="picture" class="picture" placeholder="Chọn ảnh" onchange="displayFileName()" style="display: none;">
+                                <textarea placeholder="Nhập nội dung..." class="file-name" readonly>${product.picture}</textarea>
+                            </div>
+                            <div class="tool">
+                                <button type="button" class="restore">
+                                    <i class="fas fa-trash-restore"></i>
+                                </button>
+                            </div>
+                        `;
+                    } else if (product.isDeleted == "false"){
+                        newProduct.innerHTML = `
+                            <textarea placeholder="Nhập id..." readonly>${product.id}</textarea>
+                            <textarea placeholder="Nhập tên sản phẩm..." readonly>${product.name}</textarea>
+                            <textarea placeholder="Nhập tên tác giả..." readonly>${product.author}</textarea>
+                            <textarea placeholder="chọn thể loại..." readonly>${product.category}</textarea>
+                            <textarea placeholder="Nhập nhà xuất bản..." readonly>${product.nxb}</textarea>
+                            <textarea placeholder="Nhập giá tiền..." readonly>${product.price}</textarea>
+                            <div class="input-picture">
+                                <input type="file" name="picture" class="picture" placeholder="Chọn ảnh" onchange="displayFileName()" style="display: none;">
+                                <textarea placeholder="Nhập nội dung..." class="file-name" readonly>${product.picture}</textarea>
+                            </div>
+                            <div class="tool">
+                                <button type="button" class="fix">
+                                    <i class="fas fa-wrench"></i>
+                                </button>
+                                <button type="button" class="delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                    }
                     listProductsBlock.appendChild(newProduct);
                     break;
                 }
             }
-        })
+        })     
+        fixButtons();
+        deleteButtons();
     }
 }
 

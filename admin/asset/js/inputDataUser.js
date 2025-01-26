@@ -193,28 +193,48 @@ function searchButton() {
                 } else data = user[value]
                 data = data.trim().toLowerCase();
                 if (data.includes(valueSearch) && !data.includes("gmail")) {
+                    console.log(data)
                     var newUser = document.createElement('div');
                     newUser.className = 'grid-row';
-                    newUser.innerHTML = `
-                        <textarea placeholder="Nhập id..." readonly>${user.id}</textarea>
-                        <textarea placeholder="Nhập tên người dùng..." readonly>${user.username}</textarea>
-                        <textarea placeholder="Nhập số điện thoại..." readonly>${user.phone}</textarea>
-                        <textarea placeholder="Nhập email..." readonly>${user.email}</textarea>
-                        <textarea placeholder="Nhập nội dung..." readonly>${user.address}</textarea>
-                        <div class="tool">
-                            <button type="button" class="fix">
-                                <i class="fas fa-wrench"></i>
-                            </button>
-                            <button type="button" class="delete">
-                                <i class="fas fa-ban"></i>
-                            </button>
-                        </div>
-                    `;
+                    if (user.isBanned == "true") {
+                        newUser.classList.add('banned');
+                        newUser.innerHTML = `
+                            <textarea placeholder="Nhập id..." readonly>${user.id}</textarea>
+                            <textarea placeholder="Nhập tên người dùng..." readonly>${user.username}</textarea>
+                            <textarea placeholder="Nhập số điện thoại..." readonly>${user.phone}</textarea>
+                            <textarea placeholder="Nhập email..." readonly>${user.email}</textarea>
+                            <textarea placeholder="Nhập nội dung..." readonly>${user.address}</textarea>
+                            <div class="tool">
+                                <button type="button" class="unlock">
+                                    <i class="fas fa-unlock"></i>
+                                </button>
+                            </div>
+                        `;
+                    } else if (user.isBanned == "false") {
+                        newUser.innerHTML = `
+                            <textarea placeholder="Nhập id..." readonly>${user.id}</textarea>
+                            <textarea placeholder="Nhập tên người dùng..." readonly>${user.username}</textarea>
+                            <textarea placeholder="Nhập số điện thoại..." readonly>${user.phone}</textarea>
+                            <textarea placeholder="Nhập email..." readonly>${user.email}</textarea>
+                            <textarea placeholder="Nhập nội dung..." readonly>${user.address}</textarea>
+                            <div class="tool">
+                                <button type="button" class="fix">
+                                    <i class="fas fa-wrench"></i>
+                                </button>
+                                <button type="button" class="delete">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                        `;
+                    }
                     listUsersBlock.appendChild(newUser);
                     break;
                 }
             }
         })
+        fixButtons();
+        banButtonsAllUsers();
+        unlockButtonsAllUsers();
     }
 }
 
