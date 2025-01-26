@@ -24,11 +24,11 @@
                 </a>
                 <a href="nguoidung.html">
                     <i class="fas fa-user"></i>
-                    <h3>Người Dùng</h3>
+                    <h3>Người dùng</h3>
                 </a>
                 <div class="active">
                     <i class="fas fa-archive"></i>
-                    <h3>Sản Phẩm</h3>
+                    <h3>Sản phẩm</h3>
                 </div>
                 <a href="donhang.html">
                     <i class="fas fa-clipboard-list"></i>
@@ -89,10 +89,8 @@
                         <option value="deletedProducts">Sản phẩm bị xóa</option>
                         <option value="allProducts">Tất cả sản phẩm</option>
                     </select>
-                    <form>
-                        <input type="text" name="search" placeholder="Tìm kiếm...">
-                    </form>
-                    <button type="button">
+                    <input type="text" name="search" placeholder="Tìm kiếm..." id="searchInput">
+                    <button type="button" id="searchButton" onclick="searchButton()">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

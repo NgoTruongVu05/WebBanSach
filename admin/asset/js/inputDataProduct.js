@@ -207,13 +207,56 @@ function restoreButtonsAllProducts(){
     })
 }
 
+function searchButton() {
+    var input = document.getElementById('searchInput');
+    var valueSearch = input.value.trim().toLowerCase();
+    if (valueSearch == "") {
+        productFilter();
+    } else {
+        listProductsBlock.innerHTML = '';
+        products.forEach(product => {
+            for (const value in product){
+                if (typeof(product[value]) !== "string"){
+                    var data = String(product[value]);
+                } else data = product[value]
+                data = data.trim().toLowerCase();
+                if (data.includes(valueSearch) && !data.includes("gmail")) {
+                    console.log(data)
+                    var newProduct = document.createElement('div');
+                    newProduct.className = 'grid-row-product';
+                    newProduct.innerHTML = `
+                        <textarea placeholder="Nhập id..." readonly>${product.id}</textarea>
+                        <textarea placeholder="Nhập tên sản phẩm..." readonly>${product.name}</textarea>
+                        <textarea placeholder="Nhập tên tác giả..." readonly>${product.author}</textarea>
+                        <textarea placeholder="chọn thể loại..." readonly>${product.category}</textarea>
+                        <textarea placeholder="Nhập nhà xuất bản..." readonly>${product.nxb}</textarea>
+                        <textarea placeholder="Nhập giá tiền..." readonly>${product.price}</textarea>
+                        <div class="input-picture">
+                            <input type="file" name="picture" class="picture" placeholder="Chọn ảnh" onchange="displayFileName()" style="display: none;">
+                            <textarea placeholder="Nhập nội dung..." class="file-name" readonly>${product.picture}</textarea>
+                        </div>
+                        <div class="tool">
+                            <button type="button" class="fix">
+                                <i class="fas fa-wrench"></i>
+                            </button>
+                            <button type="button" class="delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    listProductsBlock.appendChild(newProduct);
+                    break;
+                }
+            }
+        })
+    }
+}
+
 function productFilter(){
     const productFilter = document.getElementById('productFilter');
-    products.forEach((product) => {
-        if (productFilter.value == "activeProducts") activeProducts(listProductsBlock);
-        else if (productFilter.value == "deletedProducts") deletedProducts(listProductsBlock);
-        else if (productFilter.value == "allProducts") allProducts(listProductsBlock);
-    });
+    if (productFilter.value == "activeProducts") activeProducts(listProductsBlock);
+    else if (productFilter.value == "deletedProducts") deletedProducts(listProductsBlock);
+    else if (productFilter.value == "allProducts") allProducts(listProductsBlock);
 }
 
 function activeProducts(listProductsBlock){

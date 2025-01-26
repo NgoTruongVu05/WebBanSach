@@ -79,8 +79,8 @@ function fixButtons() {
                                 users[index][dataInput.id] = dataInput.value;
                             })
                             textareaGridRows = gridRow.querySelectorAll('textarea');
-                            const data = ['id','username','phone','email','address'];
-                            var count=0;
+                            const data = ['id', 'username', 'phone', 'email', 'address'];
+                            var count = 0;
                             textareaGridRows.forEach(textareaGridRow => {
                                 textareaGridRow.innerHTML = users[index][data[count]];
                                 count++;
@@ -88,7 +88,7 @@ function fixButtons() {
                             menuFix.remove();
                             toolMenu.style.display = 'none';
                             behindMenu.style.display = 'none';
-                            
+
                         }
                     }
                 });
@@ -179,13 +179,50 @@ function unlockButtonsAllUsers() {
     })
 }
 
+function searchButton() {
+    var input = document.getElementById('searchInput');
+    var valueSearch = input.value.trim().toLowerCase();
+    if (valueSearch == "") {
+        userFilter();
+    } else {
+        listUsersBlock.innerHTML = '';
+        users.forEach(user => {
+            for (const value in user){
+                if (typeof(user[value]) !== "string"){
+                    var data = String(user[value]);
+                } else data = user[value]
+                data = data.trim().toLowerCase();
+                if (data.includes(valueSearch) && !data.includes("gmail")) {
+                    var newUser = document.createElement('div');
+                    newUser.className = 'grid-row';
+                    newUser.innerHTML = `
+                        <textarea placeholder="Nhập id..." readonly>${user.id}</textarea>
+                        <textarea placeholder="Nhập tên người dùng..." readonly>${user.username}</textarea>
+                        <textarea placeholder="Nhập số điện thoại..." readonly>${user.phone}</textarea>
+                        <textarea placeholder="Nhập email..." readonly>${user.email}</textarea>
+                        <textarea placeholder="Nhập nội dung..." readonly>${user.address}</textarea>
+                        <div class="tool">
+                            <button type="button" class="fix">
+                                <i class="fas fa-wrench"></i>
+                            </button>
+                            <button type="button" class="delete">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    `;
+                    listUsersBlock.appendChild(newUser);
+                    break;
+                }
+            }
+        })
+    }
+}
+
 function userFilter() {
     const userFilter = document.getElementById('userFilter');
-    users.forEach((user) => {
-        if (userFilter.value == "activeUsers") activeUsers(listUsersBlock);
-        else if (userFilter.value == "bannedUsers") bannedUsers(listUsersBlock);
-        else if (userFilter.value == "allUsers") allUsers(listUsersBlock);
-    });
+    if (userFilter.value == "activeUsers") activeUsers(listUsersBlock);
+    else if (userFilter.value == "bannedUsers") bannedUsers(listUsersBlock);
+    else if (userFilter.value == "allUsers") allUsers(listUsersBlock);
 }
 
 function activeUsers(listUsersBlock) {

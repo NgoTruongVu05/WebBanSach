@@ -104,6 +104,39 @@ function setDetailButtons(detailButtons){
     })
 }
 
+function searchButton() {
+    var input = document.getElementById('searchInput');
+    var valueSearch = input.value.trim().toLowerCase();
+    if (valueSearch == "") {
+        cartFilter();
+    } else {
+        listCartsBlock.innerHTML = '';
+        carts.forEach(cart => {
+            for (const value in cart){
+                if (typeof(cart[value]) !== "string"){
+                    var data = String(cart[value]);
+                } else data = cart[value]
+                data = data.trim().toLowerCase();
+                if (data.includes(valueSearch) && !data.includes("gmail")) {
+                    var newCart = document.createElement('div');
+                    newCart.className = 'grid-row-cart';
+                    newCart.innerHTML = `
+                        <textarea placeholder="Nhập id..." readonly>${cart.id}</textarea>
+                        <textarea placeholder="Nhập tên người dùng..." readonly>${cart.username}</textarea>
+                        <textarea placeholder="Nhập địa chỉ..." readonly>${cart.address}</textarea>
+                        <textarea placeholder="Nhập số điện thoại..." readonly>${cart.phone}</textarea>
+                        <textarea placeholder="Nhập tổng giá..." readonly>${cart.amount}</textarea>
+                        <button type="button" class="status">${cart.status}</button>
+                        <button type="button" class="detailButton">Chi tiết đơn hàng</button>
+                    `;
+                    listCartsBlock.appendChild(newCart);
+                    break;
+                }
+            }
+        })
+    }
+}
+
 function allCarts(listCartsBlock){
     listCartsBlock.innerHTML = '';
     carts.forEach(function (cart) {
@@ -121,7 +154,7 @@ function allCarts(listCartsBlock){
         listCartsBlock.appendChild(newCart);
     });
     var statusButtons = document.querySelectorAll('.status');
-    var detailButtons = document.querySelectorAll('.detailButton');
+    const detailButtons = document.querySelectorAll('.detailButton');
     setStatusButtons(statusButtons,true);
     setDetailButtons(detailButtons);
 }
@@ -139,7 +172,7 @@ function statusCarts(listCartsBlock,status){
                 <textarea placeholder="Nhập số điện thoại..." readonly>${cart.phone}</textarea>
                 <textarea placeholder="Nhập tổng giá..." readonly>${cart.amount}</textarea>
                 <button type="button" class="status">${cart.status}</button>
-                <button type="button" class="detail">Chi tiết đơn hàng</button>
+                <button type="button" class="detailButton">Chi tiết đơn hàng</button>
             `;
             listCartsBlock.appendChild(newCart);
         }
