@@ -641,10 +641,12 @@ button:hover{
 .grid-header-detail textarea{
     padding: 0;
     text-align: center;
-    border-left: 1px solid var(--color-light);
     width: 100%;
     resize: none;
     font-size: 1.5vw;
+}
+.grid-header-detail textarea:not(:first-child){
+    border-left: 1px solid var(--color-light);
 }
 
 .grid-row-detail textarea{
